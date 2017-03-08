@@ -2,9 +2,14 @@
 /* Export module */
 module.exports = function toFixedTwist(value, precision) {
   // Local variable
+  var lowerThanOne = false;
   var precisionUsed = precision || 0;
   var stringValue = value.toString();
   var decimalPosition = stringValue.indexOf('.');
+  if (value < 1) {
+    value++;
+    lowerThanOne = true;
+  }
 
   /* ---- Checks ---- */
   checkArguments(value, precisionUsed);
@@ -13,6 +18,9 @@ module.exports = function toFixedTwist(value, precision) {
   if ( decimalPosition > -1 ) {
     var precisionValue = moveDecimal(value, decimalPosition + precisionUsed);
     value = moveDecimal(Math.round(precisionValue), decimalPosition);
+  }
+  if (lowerThanOne) {
+    value--;
   }
   return value.toFixed(precisionUsed);
 };

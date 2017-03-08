@@ -7,6 +7,7 @@ describe('toFixedTwist', function() {
 
   it('should handle numbers smaller than 1', function () {
     expect(toFixedTwist(0.5, 1)).toBe('0.5');
+    expect(toFixedTwist(0.5155322, 10)).toBe('0.5155322000');
   });
 
   it('should return the input value as a string, with added precision', function () {
@@ -65,10 +66,5 @@ describe('toFixedTwist', function() {
       expect(e.message).toBe('Precision argument must be between 0 and 20');
     }
     expect(thrown).toBe(true);
-  });
-
-  /* toFixedTwist(0.5155322, 10) ==> "0.5155322000"*/
-  it('should add precision to numbers lower than 1', function () {
-    expect(toFixedTwist(0.5155322, 10)).toBe('0.5155322000');
   });
 });
